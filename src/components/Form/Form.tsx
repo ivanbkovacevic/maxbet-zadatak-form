@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Form.module.scss";
 
 interface UserInfo {
   email: string;
@@ -11,14 +12,14 @@ interface UserInfo {
 }
 interface FormProps {
   initialValues: UserInfo;
-  onSubmit: () => void;
+  handleSubmit: (e:any) => void;
   children: React.ReactNode;
 }
-const Form: React.FC<FormProps> = ({ initialValues, onSubmit, children }) => {
+const Form: React.FC<FormProps> = ({ initialValues, handleSubmit, children }) => {
   return (
-    <form onSubmit={onSubmit}>
-      Form
-   {children}
+    <form onSubmit={handleSubmit} className={style.wrapper}>
+    <h1>Form</h1>
+      {children}
     </form>
   );
 };

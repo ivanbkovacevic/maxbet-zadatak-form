@@ -17,6 +17,8 @@
 import React, { useState } from "react";
 import Form from "./components/Form/Form";
 import FormInput from "./components/FormInput/FormInput";
+import style from "./App.module.scss";
+import "./globals.scss";
 
 export const App = () => {
   // Example
@@ -32,18 +34,29 @@ export const App = () => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: SubmitEvent) => {
+    e.preventDefault();
     setFormSubmited(true);
   };
 
   const handleChange = (fieldName: string, value: string | number) => {
-    setUserInfo({...userInfo,[fieldName]: value });
-    console.log(fieldName, userInfo)
-
+    if (fieldName.includes("phone")) {
+      const phoneField = fieldName.split(".");
+      const phoneSufix = phoneField[1];
+      setUserInfo({
+        ...userInfo,
+        phone: {
+          ...userInfo.phone,
+          [phoneSufix]: value,
+        },
+      });
+      return;
+    }
+    setUserInfo({ ...userInfo, [fieldName]: value });
   };
   return (
-    <div>
-      <Form initialValues={userInfo} onSubmit={handleSubmit}>
+    <div className={style.wrapper}>
+      <Form initialValues={userInfo} handleSubmit={handleSubmit}>
         <FormInput
           type="email"
           required
@@ -77,10 +90,12 @@ export const App = () => {
           name="phone.number"
           value={userInfo.phone.number}
         />
-        <button type="submit" value="Submit">Submit</button>
+        <button type="submit" value="Submit">
+          Submit
+        </button>
       </Form>
       {formSubmited && (
-        <div>
+        <div className={style.userInfo}>
           <p>Email: {userInfo.email}</p>
           <p>Age: {userInfo.age}</p>
           <p>Name: {userInfo.name}</p>

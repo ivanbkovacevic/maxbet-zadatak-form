@@ -1,4 +1,6 @@
 import React from "react";
+import style from './FormInput.module.scss'
+
 
 interface FormInputProps {
   type: string;
@@ -18,6 +20,7 @@ const FormInput: React.FC<FormInputProps> = ({
 }) => {
   return (
     <input
+      className={style.wrapper}
       type={type}
       required={required}
       name={name}

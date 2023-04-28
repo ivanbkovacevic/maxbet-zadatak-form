@@ -1,10 +1,4 @@
-@import './styles/fonts';
-@import './styles/mixins';
-@import './styles/variables';
-@import "slick-carousel/slick/slick.css";
-@import "slick-carousel/slick/slick-theme.css";
-@import "./components/Reusable/MySlider/myReactSlick.css";
-@import "aos/dist/aos.css";
+
 
 
 /* Box sizing rules */
@@ -34,8 +28,6 @@ dl,
 dd {
   margin: 0;
   padding: 0;
-  font-family: $font-regular;
-  color: $jet;
 }
 
 html {
@@ -44,8 +36,8 @@ html {
 /* Set default font size and family */
 body {
   font-size: 16px;
-  font-family: $font-regular;
   line-height: 1.5;
+  background-color: rgb(42, 40, 40);
 }
 
 /* Remove list styles (bullets, numbering) */
@@ -66,20 +58,3 @@ img {
   border-style: none;
 }
 
-// /* Ensure that elements with animations and transitions are not affected by the reset */
-// :not(style) {
-//   animation: none !important;
-//   transition: none !important;
-// }
-
-button {
-  font-family: $font-regular;
-  cursor: pointer;
-}
-
-[data-centered='yes'] {
-  width: 100%;
-  @include laptop-greater {
-    width: $sectionCenteredWidth;
-  }
-}
