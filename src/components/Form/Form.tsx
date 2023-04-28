@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormContext } from "../../context/FormContext";
 import style from "./Form.module.scss";
 
 interface UserInfo {
@@ -12,13 +13,18 @@ interface UserInfo {
 }
 interface FormProps {
   initialValues: UserInfo;
-  handleSubmit: (e:any) => void;
   children: React.ReactNode;
 }
-const Form: React.FC<FormProps> = ({ initialValues, handleSubmit, children }) => {
+const Form: React.FC<FormProps> = ({
+  initialValues,
+  children,
+}) => {
+  
+  const { handleFormSubmited } = useContext(FormContext);
+
   return (
-    <form onSubmit={handleSubmit} className={style.wrapper}>
-    <h1>Form</h1>
+    <form onSubmit={handleFormSubmited} className={style.wrapper}>
+      <h1>Form</h1>
       {children}
     </form>
   );
