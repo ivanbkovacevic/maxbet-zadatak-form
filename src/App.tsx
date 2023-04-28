@@ -20,6 +20,8 @@ import FormInput from "./components/FormInput/FormInput";
 
 export const App = () => {
   // Example
+  const [formSubmited, setFormSubmited] = useState<boolean>(false);
+
   const [userInfo, setUserInfo] = useState({
     email: "example@alea.com",
     age: 30,
@@ -30,21 +32,63 @@ export const App = () => {
     },
   });
 
+  const handleSubmit = () => {
+    setFormSubmited(true);
+  };
+
+  const handleChange = (fieldName: string, value: string | number) => {
+    setUserInfo({...userInfo,[fieldName]: value });
+    console.log(fieldName, userInfo)
+
+  };
   return (
     <div>
-      <Form initialValues={userInfo} onSubmit={() => setUserInfo}>
+      <Form initialValues={userInfo} onSubmit={handleSubmit}>
         <FormInput
           type="email"
           required
           name="email"
           placeHolder="your@email.com"
+          value={userInfo.email}
+          onChangeHandler={handleChange}
         />
-        <FormInput type="number" name="age" />
-        <FormInput type="text" required name="name" />
-        <FormInput type="text" name="phone.ext" />
-        <FormInput type="text" name="phone.number" />
-        <FormInput type="submit" value="Submit" />
+        <FormInput
+          onChangeHandler={handleChange}
+          type="number"
+          name="age"
+          value={userInfo.age}
+        />
+        <FormInput
+          onChangeHandler={handleChange}
+          type="text"
+          required
+          name="name"
+          value={userInfo.name}
+        />
+        <FormInput
+          onChangeHandler={handleChange}
+          type="text"
+          name="phone.ext"
+          value={userInfo.phone.ext}
+        />
+        <FormInput
+          onChangeHandler={handleChange}
+          type="text"
+          name="phone.number"
+          value={userInfo.phone.number}
+        />
+        <button type="submit" value="Submit">Submit</button>
       </Form>
+      {formSubmited && (
+        <div>
+          <p>Email: {userInfo.email}</p>
+          <p>Age: {userInfo.age}</p>
+          <p>Name: {userInfo.name}</p>
+          <p>
+            Phone: {userInfo.phone.ext} <span>{userInfo.phone.number}</span>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
