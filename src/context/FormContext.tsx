@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 
 interface FormContextState {
   formSubmited: boolean;
@@ -7,27 +7,24 @@ interface FormContextState {
 
 interface FormContextStateProps {
   state: FormContextState;
-  handleFormSubmited: (e:any) => void;
+  handleFormSubmited: (e: any) => void;
 }
 
 const FormContext = React.createContext<FormContextStateProps>({
   state: { formSubmited: false, initialData: {} },
-  handleFormSubmited: () => {}
+  handleFormSubmited: () => {},
 });
 
 function FormContextProvider(props: React.PropsWithChildren<{}>) {
   const [state, setState] = React.useState<FormContextState>({
     formSubmited: false,
-    initialData: {}
+    initialData: {},
   });
 
-  const handleFormSubmited =  (e:SubmitEvent) => {
-    console.log('ssssss')
+  const handleFormSubmited = (e: SubmitEvent) => {
     setState((prevState) => ({ ...prevState, formSubmited: true }));
     e.preventDefault();
   };
-
-
 
   return (
     <FormContext.Provider

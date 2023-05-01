@@ -15,11 +15,7 @@ interface FormProps {
   initialValues: UserInfo;
   children: React.ReactNode;
 }
-const Form: React.FC<FormProps> = ({
-  initialValues,
-  children,
-}) => {
-  
+const Form: React.FC<FormProps> = ({ initialValues, children }) => {
   const { handleFormSubmited } = useContext(FormContext);
 
   return (
